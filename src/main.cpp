@@ -6,8 +6,7 @@
 
 int main(int argc, char **argv) {
   try {
-    nxscan::validator::Input input{std::cout, argc, argv};
-    std::vector<std::string> all_domains = input.parse();
+    std::vector<std::string> all_domains = nxscan::validator::parse(std::cout, argc, argv);
 
     std::cout << "Starting NXScanner\n";
     nxscan::Nxscan scanner{all_domains};
