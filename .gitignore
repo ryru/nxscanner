@@ -1,0 +1,8 @@
+# Clion
+.idea/
+
+# CMake
+cmake-build-*/
+
+# Google test library
+test/lib/
