@@ -1,0 +1,27 @@
+#include "../include/nxscan.h"
+#include "../include/validator/display.h"
+#include "../include/validator/input.h"
+#include <iomanip>
+#include <iostream>
+
+int main(int argc, char **argv) {
+  try {
+    nxscan::validator::Input input{std::cout, argc, argv};
+    std::vector<std::string> all_domains = input.parse();
+
+    std::cout << "Starting NXScanner\n";
+    nxscan::Nxscan scanner{all_domains};
+    auto elapsed = scanner.get_elapsed();
+    auto all_probes = scanner.get_probe_results();
+
+    nxscan::validator::Display display{std::cout, all_probes};
+    display.print();
+
+    std::cout << "\nNXScanner done: " << display.get_hostname_total() << " domain scanned with "
+              << display.get_dns_blocks()
+              << " potential DNS block in " << std::fixed << std::setprecision(2) << elapsed.count() << " seconds\n";
+
+  } catch (const std::exception &) {
+    return EXIT_FAILURE;
+  }
+}
