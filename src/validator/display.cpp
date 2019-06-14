@@ -25,10 +25,10 @@ void nxscan::validator::Display::print() {
   });
 
 }
-unsigned int nxscan::validator::Display::get_hostname_total() const {
+uint32_t nxscan::validator::Display::get_hostname_total() const {
   return hostname_total;
 }
-unsigned int nxscan::validator::Display::get_dns_blocks() const {
+uint32_t nxscan::validator::Display::get_dns_blocks() const {
   return dns_blocks;
 }
 void nxscan::validator::Display::print_blocked(const nxscan::scanner::Probes &p) {

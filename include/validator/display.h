@@ -14,8 +14,8 @@ class Display {
   Display(std::ostream &out, const std::vector<nxscan::scanner::Probes> &all_probes) : out{out},
                                                                                        all_probes{all_probes} {}
   void print();
-  unsigned int get_hostname_total() const;
-  unsigned int get_dns_blocks() const;
+  uint32_t get_hostname_total() const;
+  uint32_t get_dns_blocks() const;
 
  private:
   std::ostream &out;
