@@ -1,7 +1,7 @@
 #ifndef NXSCANNER_INCLUDE_VALIDATOR_DISPLAY_H_
 #define NXSCANNER_INCLUDE_VALIDATOR_DISPLAY_H_
 
-#include "../scanner/probe_set.h"
+#include "scanner/probe_set.h"
 
 #include <ostream>
 #include <vector>
