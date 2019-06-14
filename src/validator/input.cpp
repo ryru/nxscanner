@@ -23,7 +23,7 @@ std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, c
   store(parsed_options, vm);
   notify(vm);
   std::vector<std::string> all_domains;
-  if (vm.count("help") || argc <= 1) {
+  if (vm.count("help") or argc <= 1) {
     out << desc << '\n';
     throw std::exception();
   } else if (vm.count("version")) {

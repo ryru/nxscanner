@@ -13,7 +13,7 @@ void nxscan::validator::Display::print() {
       bool domain_is_equal_host = (p.get_t1_domain().get_ip_address() == p.get_t2_host().get_ip_address());
       bool domain_is_equal_random = (p.get_t1_domain().get_ip_address() == p.get_t3_random().get_ip_address());
 
-      if (domain_is_equal_host && domain_is_equal_random) {
+      if (domain_is_equal_host and domain_is_equal_random) {
         dns_blocks++;
         print_blocked(p);
       } else {
