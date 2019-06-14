@@ -8,24 +8,11 @@ class Probe {
  public:
   explicit Probe(std::string hostname) : hostname{std::move(hostname)} {}
 
-  const std::string &get_hostname() const {
-    return hostname;
-  }
-
-  const std::string &get_ip_address() const {
-    return ip_address;
-  }
-  void set_ip_address(const std::string &ip) {
-    Probe::ip_address = ip;
-  }
-
-  void set_is_valid_hostname(bool is_valid) {
-    Probe::is_valid_hostname = is_valid;
-  }
-
-  bool is_valid() const {
-    return is_valid_hostname;
-  }
+  const std::string &get_hostname() const;
+  const std::string &get_ip_address() const;
+  void set_ip_address(const std::string &ip);
+  void set_is_valid_hostname(bool is_valid);
+  bool is_valid() const;
 
  private:
   std::string hostname;
@@ -33,9 +20,7 @@ class Probe {
   bool is_valid_hostname{};
 };
 
-inline bool operator==(const Probe &lhs, const Probe &rhs) {
-  return lhs.get_hostname() == rhs.get_hostname();
-}
+bool operator==(const Probe &lhs, const Probe &rhs);
 }
 
 #endif //NXSCANNER_INCLUDE_SCANNER_PROBE_H_

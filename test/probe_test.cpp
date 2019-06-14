@@ -1,4 +1,4 @@
-#include "../include/scanner/probe.h"
+#include "scanner/probe.h"
 #include <gtest/gtest.h>
 
 using nxscan::scanner::Probe;

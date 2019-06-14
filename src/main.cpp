@@ -1,6 +1,6 @@
-#include "../include/nxscan.h"
-#include "../include/validator/display.h"
-#include "../include/validator/input.h"
+#include "nxscan.h"
+#include "validator/display.h"
+#include "validator/input.h"
 #include <iomanip>
 #include <iostream>
 
@@ -10,6 +10,7 @@ int main(int argc, char **argv) {
 
     std::cout << "Starting NXScanner\n";
     nxscan::Nxscan scanner{all_domains};
+    scanner.start();
     auto elapsed = scanner.get_elapsed();
     auto all_probes = scanner.get_probe_results();
 
