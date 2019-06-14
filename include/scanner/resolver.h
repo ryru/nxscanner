@@ -1,6 +1,3 @@
-//
-// Created by pascal on 07.06.19.
-//
 #ifndef NXSCANNER_INCLUDE_SCANNER_RESOLVER_H_
 #define NXSCANNER_INCLUDE_SCANNER_RESOLVER_H_
 
