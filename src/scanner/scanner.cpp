@@ -3,13 +3,13 @@
 #include <algorithm>
 
 void nxscan::scanner::Scanner::scan() {
-  std::for_each(all_probes.begin(), all_probes.end(), [&](nxscan::scanner::Probes &p) {
+  std::for_each(allProbes.begin(), allProbes.end(), [&](nxscan::scanner::Probes &p) {
     boost::asio::io_service io_service;
-    nxscan::scanner::Resolver resolver1{io_service, p.get_t1_domain()};
+    nxscan::scanner::Resolver resolver1{io_service, p.getDomain()};
     resolver1.resolve();
-    nxscan::scanner::Resolver resolver2{io_service, p.get_t2_host()};
+    nxscan::scanner::Resolver resolver2{io_service, p.getHost()};
     resolver2.resolve();
-    nxscan::scanner::Resolver resolver3{io_service, p.get_t3_random()};
+    nxscan::scanner::Resolver resolver3{io_service, p.getRandomHost()};
     resolver3.resolve();
     io_service.run();
   });

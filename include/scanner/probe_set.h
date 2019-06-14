@@ -6,20 +6,20 @@
 namespace nxscan::scanner {
 class Probes {
  public:
-  Probes(Probe t1_domain, Probe t2_host, Probe t3_random)
-      : t1_domain(std::move(t1_domain)), t2_host(std::move(t2_host)), t3_random(std::move(t3_random)) {}
+  Probes(Probe domain, Probe host, Probe randomHost)
+      : domain(std::move(domain)), host(std::move(host)), randomHost(std::move(randomHost)) {}
 
-  Probe &get_t1_domain();
-  Probe &get_t2_host();
-  Probe &get_t3_random();
-  const Probe &get_t1_domain() const;
-  const Probe &get_t2_host() const;
-  const Probe &get_t3_random() const;
+  Probe &getDomain();
+  Probe &getHost();
+  Probe &getRandomHost();
+  const Probe &getDomain() const;
+  const Probe &getHost() const;
+  const Probe &getRandomHost() const;
 
  private:
-  Probe t1_domain;
-  Probe t2_host;
-  Probe t3_random;
+  Probe domain;
+  Probe host;
+  Probe randomHost;
 };
 }
 

@@ -2,17 +2,17 @@
 
 void nxscan::Nxscan::start() {
   // generate data set
-  all_probes = nxscan::scanner::get_probes(all_domains);
+  allProbes = nxscan::scanner::getProbes(allDomain);
 
   // scan
-  nxscan::scanner::Scanner scanner{all_probes};
-  start_time = std::chrono::high_resolution_clock::now();
+  nxscan::scanner::Scanner scanner{allProbes};
+  timeStart = std::chrono::high_resolution_clock::now();
   scanner.scan();
-  end_time = std::chrono::high_resolution_clock::now();
+  timeEnd = std::chrono::high_resolution_clock::now();
 }
-std::chrono::duration<double> nxscan::Nxscan::get_elapsed() {
-  return end_time - start_time;
+std::chrono::duration<double> nxscan::Nxscan::getElapsedTime() {
+  return timeEnd - timeStart;
 }
-const std::vector<nxscan::scanner::Probes> nxscan::Nxscan::get_probe_results() {
-  return all_probes;
+const std::vector<nxscan::scanner::Probes> nxscan::Nxscan::getProbeResults() {
+  return allProbes;
 }

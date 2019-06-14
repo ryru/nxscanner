@@ -4,7 +4,7 @@
 #include <array>
 #include <random>
 
-static const std::string random_string(size_t length) {
+static const std::string randomString(size_t length) {
   std::random_device r;
   std::default_random_engine random_engine(r());
   auto randchar = [&]() -> char {
@@ -20,12 +20,12 @@ static const std::string random_string(size_t length) {
   return str;
 }
 
-std::vector<nxscan::scanner::Probes> nxscan::scanner::get_probes(std::vector<std::string> &all_domains) {
-  std::vector<std::string> all_hosts;
-  std::vector<std::string> all_randoms;
-  std::vector<nxscan::scanner::Probes> all_probes;
+std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std::string> &allDomain) {
+  std::vector<std::string> allHosts;
+  std::vector<std::string> allRandomHosts;
+  std::vector<nxscan::scanner::Probes> allProbes;
 
-  std::for_each(all_domains.begin(), all_domains.end(), [&](const std::string &domain) {
+  std::for_each(allDomain.begin(), allDomain.end(), [&](const std::string &domain) {
     std::string www{"www."};
     std::string host{};
     if (domain.compare(0, www.length(), www) != 0) {
@@ -33,17 +33,17 @@ std::vector<nxscan::scanner::Probes> nxscan::scanner::get_probes(std::vector<std
     } else {
       host = domain;
     }
-    all_hosts.push_back(host);
+    allHosts.push_back(host);
 
-    std::string random{random_string(5) + '.' + host};
-    all_randoms.push_back(random);
+    std::string random{randomString(5) + '.' + host};
+    allRandomHosts.push_back(random);
 
     nxscan::scanner::Probe p1{domain};
     nxscan::scanner::Probe p2{host};
     nxscan::scanner::Probe p3{random};
-    nxscan::scanner::Probes probe_pair{p1, p2, p3};
-    all_probes.push_back(probe_pair);
+    nxscan::scanner::Probes probePair{p1, p2, p3};
+    allProbes.push_back(probePair);
   });
 
-  return all_probes;
+  return allProbes;
 }

@@ -13,17 +13,17 @@ namespace nxscan {
 class Nxscan {
 
  public:
-  explicit Nxscan(std::vector<std::string> &all_domains) : all_domains{all_domains} {}
+  explicit Nxscan(std::vector<std::string> &allDomain) : allDomain{allDomain} {}
 
   void start();
-  std::chrono::duration<double> get_elapsed();
-  const std::vector<nxscan::scanner::Probes> get_probe_results();
+  std::chrono::duration<double> getElapsedTime();
+  const std::vector<nxscan::scanner::Probes> getProbeResults();
 
  private:
-  std::chrono::time_point<std::chrono::high_resolution_clock> start_time;
-  std::chrono::time_point<std::chrono::high_resolution_clock> end_time;
-  std::vector<std::string> all_domains;
-  std::vector<nxscan::scanner::Probes> all_probes;
+  std::chrono::time_point<std::chrono::high_resolution_clock> timeStart;
+  std::chrono::time_point<std::chrono::high_resolution_clock> timeEnd;
+  std::vector<std::string> allDomain;
+  std::vector<nxscan::scanner::Probes> allProbes;
 
 
 };

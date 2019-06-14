@@ -11,22 +11,22 @@ namespace nxscan::validator {
 class Display {
 
  public:
-  Display(std::ostream &out, const std::vector<nxscan::scanner::Probes> &all_probes) : out{out},
-                                                                                       all_probes{all_probes} {}
+  Display(std::ostream &out, const std::vector<nxscan::scanner::Probes> &allProbes) : out{out},
+                                                                                      allProbes{allProbes} {}
   void print();
-  uint32_t get_hostname_total() const;
-  uint32_t get_dns_blocks() const;
+  uint32_t getDomainTotal() const;
+  uint32_t getBlockedDomainTotal() const;
 
  private:
   std::ostream &out;
-  const std::vector<nxscan::scanner::Probes> &all_probes;
-  unsigned int hostname_total{0};
-  unsigned int dns_blocks{0};
+  const std::vector<nxscan::scanner::Probes> &allProbes;
+  unsigned int domainTotal{0};
+  unsigned int blockedDomainTotal{0};
 
-  void print_blocked(const nxscan::scanner::Probes &p);
-  void print_non_blocked(const nxscan::scanner::Probes &p);
-  void print_non_resolvable(const nxscan::scanner::Probes &p);
-  void print_result(const std::string &hostname, std::string &&prefix, std::string &&postfix);
+  void printBlockedDomain(const nxscan::scanner::Probes &p);
+  void printNonBlockedDomain(const nxscan::scanner::Probes &p);
+  void printNonResolvableDomain(const nxscan::scanner::Probes &p);
+  void printAllResult(const std::string &hostname, std::string &&prefix, std::string &&postfix);
 
 };
 

@@ -10,38 +10,38 @@ Probe domain{"example.com"};
 Probe host{"www.example.com"};
 Probe invalid{"abcde.example.com"};
 
-TEST(Probes, test_get_domain_reference) {
+TEST(Probes, testTetDomainReference) {
   Probes probes{domain, host, invalid};
-  Probe &r_domain{probes.get_t1_domain()};
-  ASSERT_EQ(domain, r_domain);
+  Probe &rDomain{probes.getDomain()};
+  ASSERT_EQ(domain, rDomain);
 }
 
-TEST(Probes, test_get_domain_const_reference) {
+TEST(Probes, testGetDomainConstReference) {
   Probes probes{domain, host, invalid};
-  const Probe &cr_domain{probes.get_t1_domain()};
-  ASSERT_EQ(domain, cr_domain);
+  const Probe &crDomain{probes.getDomain()};
+  ASSERT_EQ(domain, crDomain);
 }
 
-TEST(Probes, test_get_host_reference) {
+TEST(Probes, testGetHostReference) {
   Probes probes{domain, host, invalid};
-  Probe &r_host{probes.get_t2_host()};
-  ASSERT_EQ(host, r_host);
+  Probe &rHost{probes.getHost()};
+  ASSERT_EQ(host, rHost);
 }
 
-TEST(Probes, test_get_host_const_reference) {
+TEST(Probes, testGetHostConstReference) {
   Probes probes{domain, host, invalid};
-  const Probe &cr_host{probes.get_t2_host()};
-  ASSERT_EQ(host, cr_host);
+  const Probe &crHost{probes.getHost()};
+  ASSERT_EQ(host, crHost);
 }
 
-TEST(Probes, test_get_random_reference) {
+TEST(Probes, testGetRandomReference) {
   Probes probes{domain, host, invalid};
-  Probe &r_random{probes.get_t3_random()};
-  ASSERT_EQ(invalid, r_random);
+  Probe &rRandom{probes.getRandomHost()};
+  ASSERT_EQ(invalid, rRandom);
 }
 
-TEST(Probes, test_get_random_const_reference) {
+TEST(Probes, testGetRandomConstReference) {
   Probes probes{domain, host, invalid};
-  Probe &cr_random{probes.get_t3_random()};
-  ASSERT_EQ(invalid, cr_random);
+  Probe &crRandom{probes.getRandomHost()};
+  ASSERT_EQ(invalid, crRandom);
 }

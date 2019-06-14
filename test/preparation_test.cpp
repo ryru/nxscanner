@@ -4,17 +4,17 @@
 
 #include <vector>
 
-TEST(Preparation, test_domain) {
+TEST(Preparation, testDomain) {
   std::string expect{"example.com"};
   std::vector<std::string> domains{expect};
-  std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::get_probes(domains);
-  ASSERT_EQ(expect, probes[0].get_t1_domain().get_hostname());
+  std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::getProbes(domains);
+  ASSERT_EQ(expect, probes[0].getDomain().getDomainname());
 }
 
-TEST(Preparation, test_host) {
+TEST(Preparation, testHost) {
   std::string domain{"example.com"};
   std::string expect{"www.example.com"};
   std::vector<std::string> domains{domain};
-  std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::get_probes(domains);
-  ASSERT_EQ(expect, probes[0].get_t2_host().get_hostname());
+  std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::getProbes(domains);
+  ASSERT_EQ(expect, probes[0].getHost().getDomainname());
 }

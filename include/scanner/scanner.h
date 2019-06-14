@@ -10,11 +10,11 @@ namespace nxscan::scanner {
 
 class Scanner {
  public:
-  explicit Scanner(std::vector<nxscan::scanner::Probes> &all_probes) : all_probes{all_probes} {}
+  explicit Scanner(std::vector<nxscan::scanner::Probes> &allProbes) : allProbes{allProbes} {}
   void scan();
 
  private:
-  std::vector<nxscan::scanner::Probes> &all_probes;
+  std::vector<nxscan::scanner::Probes> &allProbes;
 };
 }
 

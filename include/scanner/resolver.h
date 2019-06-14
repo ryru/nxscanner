@@ -15,7 +15,7 @@ class Resolver {
 
  public:
 
-  Resolver(boost::asio::io_service &io_service, Probe &probe) : resolver{io_service}, probe{probe} {}
+  Resolver(boost::asio::io_service &ioService, Probe &probe) : resolver{ioService}, probe{probe} {}
 
   void resolve();
 
@@ -24,8 +24,8 @@ class Resolver {
   Probe &probe;
 
   void handle_resolve(const boost::system::error_code &err,
-                      const boost::asio::ip::tcp::resolver::iterator &endpoint_iterator);
-/**/};
+                      const boost::asio::ip::tcp::resolver::iterator &endpointIterator);
+};
 
 }
 
