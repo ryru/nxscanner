@@ -1,15 +1,19 @@
 #include "scanner/preparation.h"
 
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
+#include <array>
+#include <random>
 
 static const std::string random_string(size_t length) {
-  std::srand(std::time(nullptr));
-  auto randchar = []() -> char {
-    const char charset[] = "abcdefghijklmnopqrstuvwxyz";
-    const size_t max_index = (sizeof(charset) - 1);
-    return charset[std::rand() % max_index];
+  std::random_device r;
+  std::default_random_engine random_engine(r());
+  auto randchar = [&]() -> char {
+    const std::array charset
+        {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+         'w', 'x', 'y', 'z'};
+    std::uniform_int_distribution<int> uniform_dist(0, charset.size() - 1);
+    int random_number = uniform_dist(random_engine);
+    return charset[random_number];
   };
   std::string str(length, 0);
   std::generate_n(str.begin(), length, randchar);
