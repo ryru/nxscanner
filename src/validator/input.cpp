@@ -3,11 +3,24 @@
 #include <algorithm>
 #include <boost/program_options.hpp>
 #include <fstream>
-#include <iostream>
 
 using namespace boost::program_options;
 
-std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, char **argv) {
+static const std::string getVersion() {
+  return std::string{"NXScanner version 1.0\n"};
+}
+
+static const std::string getHelp() {
+  std::string help{getVersion()};
+  help.append("usage: nxscanner [-i FILE] [DOMAIN]...\n");
+  help.append("  --domain DOMAIN\tdomain names to scan\n");
+  help.append("  -i, --input FILE\tread domain names from FILE\n");
+  help.append("  -v, --version\t\tprint version\n");
+  help.append("  -h, --help\t\tprint help\n");
+  return help;
+}
+
+std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int argc, char **argv) {
   options_description desc{"NXScanner options"};
   desc.add_options()
       ("domain", value<std::vector<std::string>>()->multitoken()->zero_tokens()->composing(), "domain names to scan")
@@ -25,23 +38,20 @@ std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, c
   variables_map vm;
   store(parsed_options, vm);
   notify(vm);
-  std::vector<std::string> all_domains;
   if (vm.count("help") or argc <= 1) {
-    out << desc << '\n';
-    throw std::exception();
+    return getHelp();
   } else if (vm.count("version")) {
-    out << "NXScanner version 1.0\n";
-    throw std::exception();
+    return getVersion();
   }
 
+  std::vector<std::string> allDomains;
   if (vm.count("input")) {
-
     auto listOfFiles = vm["input"].as<std::vector<std::string>>();
     std::for_each(listOfFiles.begin(), listOfFiles.end(), [&](std::string &filePath) {
       std::ifstream infile{filePath};
       std::string line;
       while (std::getline(infile, line)) {
-        all_domains.push_back(line);
+        allDomains.push_back(line);
       }
     });
 
@@ -50,10 +60,10 @@ std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, c
   if (vm.count("domain")) {
     auto listOfDomains = vm["domain"].as<std::vector<std::string>>();
     std::for_each(listOfDomains.begin(), listOfDomains.end(), [&](std::string &domain) {
-      all_domains.push_back(domain);
+      allDomains.push_back(domain);
     });
 
   }
 
-  return all_domains;
+  return allDomains;
 }
