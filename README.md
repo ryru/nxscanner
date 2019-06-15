@@ -7,10 +7,10 @@ NXScanner helps detecting potential DNS blocking systems in your current network
 
 ## Usage
 
-    $ ./nxscanner [options] domain_0 [domain_1 ... domain_n] 
+    ./nxscanner 
     NXScanner options:
-      --domain arg          Domains to scan
-      -i [ --input ]        read domains from file
+      --domain arg          domain names to scan
+      -i [ --input ] arg    read domains from file
       -v [ --version ]      print version
       -h [ --help ]         print help
 

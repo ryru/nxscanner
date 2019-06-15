@@ -1,14 +1,17 @@
 #include "validator/input.h"
 
+#include <algorithm>
 #include <boost/program_options.hpp>
+#include <fstream>
+#include <iostream>
 
 using namespace boost::program_options;
 
 std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, char **argv) {
   options_description desc{"NXScanner options"};
   desc.add_options()
-      ("domain", value<std::vector<std::string>>()->multitoken()->zero_tokens()->composing(), "Domains to scan")
-      ("input,i", "read domains from file")
+      ("domain", value<std::vector<std::string>>()->multitoken()->zero_tokens()->composing(), "domain names to scan")
+      ("input,i", value<std::vector<std::string>>(), "read domains from file")
       ("version,v", "print version")
       ("help,h", "print help");
 
@@ -29,8 +32,27 @@ std::vector<std::string> nxscan::validator::parse(std::ostream &out, int argc, c
   } else if (vm.count("version")) {
     out << "NXScanner version 1.0\n";
     throw std::exception();
-  } else if (vm.count("domain")) {
-    all_domains = vm["domain"].as<std::vector<std::string>>();
+  }
+
+  if (vm.count("input")) {
+
+    auto listOfFiles = vm["input"].as<std::vector<std::string>>();
+    std::for_each(listOfFiles.begin(), listOfFiles.end(), [&](std::string &filePath) {
+      std::ifstream infile{filePath};
+      std::string line;
+      while (std::getline(infile, line)) {
+        all_domains.push_back(line);
+      }
+    });
+
+  }
+
+  if (vm.count("domain")) {
+    auto listOfDomains = vm["domain"].as<std::vector<std::string>>();
+    std::for_each(listOfDomains.begin(), listOfDomains.end(), [&](std::string &domain) {
+      all_domains.push_back(domain);
+    });
+
   }
 
   return all_domains;
