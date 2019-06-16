@@ -1,4 +1,17 @@
+sudo: false
+
 language: cpp
-cimpiler:
-  - clang
-  - gcc
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - cmake --build .
+
+notifications:
+  email: false
