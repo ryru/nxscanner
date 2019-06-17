@@ -29,7 +29,8 @@ script:
   - ctest
 
 after_success:
-  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+  #  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+  - coveralls --exclude tests --gcov-options '\-lp'
 
 notifications:
   email: false
