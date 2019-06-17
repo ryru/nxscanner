@@ -29,7 +29,7 @@ script:
   - ctest
 
 after_success:
-  - coveralls --root .. -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" -E ".*googletest.*" -e "cmake"
+  - coveralls -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" -E ".*googletest.*" -e "cmake"
 
 notifications:
   email: false
