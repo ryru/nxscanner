@@ -28,8 +28,6 @@ NXScanner helps with all three reactions and prints out which domains are potent
                                                            +---------------------+
 
 
-
-
 ## Usage
 
     $ ./nxscanner 
@@ -73,7 +71,7 @@ If _example.com_ is blocked:
      addere.ch is okay
      hsr.ch is okay
      switch.ch is okay
-    !example.com is  potentially DNS blocked
+    !example.com is potentially DNS blocked
      example.org is okay
     
     NXScanner done: 5 domain scanned with 1 potential DNS block in 0.16 seconds
@@ -105,16 +103,20 @@ However, the false positive rate is relatively low:
 
 ## Compile DIY
 
+The source code is OS independent.
+
+
 ### Linux
+
 This instruction is for Ubuntu Linux but should be similar in other distributions.
 
 Requirements:
 
 - Git `git --version`
-  - if not installed: `$ sudo apt install git`
-- Cmake version >= 3.5.1 `$ cmake --version`
-  - if not installed: `$ sudo apt install cmake`
-- Boost C++ Library `$ apt -qq list libboost-all-dev`
+  - if not installed: `sudo apt install git`
+- Cmake version >= 3.5.1 `cmake --version`
+  - if not installed: `sudo apt install cmake`
+- Boost C++ Library `apt -qq list libboost-all-dev`
   - if not installed: `sudo apt install libboost-all-dev`
 
 1. `git clone https://github.com/ryru/nxscanner.git`
@@ -125,3 +127,22 @@ Requirements:
 6. `cmake --build .`
 
 That's it: `./bin/nxscanner --version`
+
+
+### Windows
+
+Requirements:
+
+- Git 
+- [MinGW](http://www.mingw.org/)
+- Cmake version >= 3.5.1
+- [Boost C++ Library](https://www.boost.org/)
+
+1. `git clone https://github.com/ryru/nxscanner.git`
+2. `cd nxscanner`
+3. `mkdir build`
+4. `cd build`
+5. `cmake .. -G "MinGW Makefiles"`
+6. `cmake --build .`
+
+That's it: `bin\nxscanner --version`
