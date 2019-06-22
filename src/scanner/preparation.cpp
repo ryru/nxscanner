@@ -24,6 +24,7 @@ std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std:
   std::vector<std::string> allHosts;
   std::vector<std::string> allRandomHosts;
   std::vector<nxscan::scanner::Probes> allProbes;
+  std::string randomPart{randomString(5)};
 
   std::for_each(allDomain.begin(), allDomain.end(), [&](const std::string &domain) {
     std::string www{"www."};
@@ -35,7 +36,7 @@ std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std:
     }
     allHosts.push_back(host);
 
-    std::string random{randomString(5) + '.' + host};
+    std::string random{randomPart + '.' + host};
     allRandomHosts.push_back(random);
 
     nxscan::scanner::Probe p1{domain};
