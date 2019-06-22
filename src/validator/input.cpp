@@ -1,4 +1,5 @@
 #include "validator/input.h"
+#include "nxs.h"
 
 #include <algorithm>
 #include <boost/program_options.hpp>
@@ -7,7 +8,7 @@
 using namespace boost::program_options;
 
 static const std::string getVersion() {
-  return std::string{"NXScanner version 1.0\n"};
+  return std::string{"NXScanner version " + std::to_string(versionMajor) + '.' + std::to_string(versionMinor) + '\n'};
 }
 
 static const std::string getHelp() {

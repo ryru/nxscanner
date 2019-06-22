@@ -1,3 +1,4 @@
+#include "nxs.h"
 #include "nxscan.h"
 #include "validator/display.h"
 #include "validator/input.h"
@@ -14,7 +15,7 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  std::cout << "Starting NXScanner\n";
+  std::cout << "Starting NXScanner " + std::to_string(versionMajor) + '.' + std::to_string(versionMajor) + '\n';
   nxscan::Nxscan scanner{std::get<std::vector<std::string>>(returnVariants)};
   scanner.start();
   auto elapsed = scanner.getElapsedTime();
