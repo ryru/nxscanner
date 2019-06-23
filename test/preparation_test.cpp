@@ -8,7 +8,7 @@ TEST(Preparation, testDomain) {
   std::string expect{"example.com"};
   std::vector<std::string> domains{expect};
   std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::getProbes(domains);
-  ASSERT_EQ(expect, probes[0].getDomain().getDomainname());
+  ASSERT_EQ(expect, probes[0].getDomain().getDomainName());
 }
 
 TEST(Preparation, testHost) {
@@ -16,5 +16,5 @@ TEST(Preparation, testHost) {
   std::string expect{"www.example.com"};
   std::vector<std::string> domains{domain};
   std::vector<nxscan::scanner::Probes> probes = nxscan::scanner::getProbes(domains);
-  ASSERT_EQ(expect, probes[0].getHost().getDomainname());
+  ASSERT_EQ(expect, probes[0].getHost().getDomainName());
 }

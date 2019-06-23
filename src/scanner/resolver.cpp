@@ -1,7 +1,7 @@
 #include "scanner/resolver.h"
 
 void nxscan::scanner::Resolver::resolve() {
-  boost::asio::ip::tcp::resolver::query query(probe.getDomainname(), "http");
+  boost::asio::ip::tcp::resolver::query query(probe.getDomainName(), "http");
 
   resolver.async_resolve(query,
                          boost::bind(&Resolver::handle_resolve, this,
@@ -12,7 +12,7 @@ void nxscan::scanner::Resolver::resolve() {
 void nxscan::scanner::Resolver::handle_resolve(const boost::system::error_code &err,
                                                const boost::asio::ip::tcp::resolver::iterator &endpointIterator) {
   if (!err) {
-    probe.setIsValidDomainname(true);
+    probe.setIsValidDomainName(true);
     std::string ipv4{};
     boost::asio::ip::tcp::resolver::iterator it = endpointIterator;
     boost::asio::ip::tcp::resolver::iterator end;
@@ -26,7 +26,7 @@ void nxscan::scanner::Resolver::handle_resolve(const boost::system::error_code &
 
     }
   } else {
-    probe.setIsValidDomainname(false);
+    probe.setIsValidDomainName(false);
   }
 
 }

@@ -9,7 +9,7 @@
 
 namespace nxscan::scanner {
 
-std::vector<nxscan::scanner::Probes> getProbes(std::vector<std::string> &allDomain);
+std::vector<nxscan::scanner::Probes> getProbes(std::vector<std::string> const &allDomain);
 
 }
 #endif //NXSCANNER_INCLUDE_SCANNER_PREPARATION_H_

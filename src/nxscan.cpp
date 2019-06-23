@@ -13,6 +13,6 @@ void nxscan::Nxscan::start() {
 std::chrono::duration<double> nxscan::Nxscan::getElapsedTime() {
   return timeEnd - timeStart;
 }
-const std::vector<nxscan::scanner::Probes> nxscan::Nxscan::getProbeResults() {
+std::vector<nxscan::scanner::Probes> nxscan::Nxscan::getProbeResults() {
   return allProbes;
 }

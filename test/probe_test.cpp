@@ -6,7 +6,7 @@ using nxscan::scanner::Probe;
 TEST(Probe, testGetDomainname) {
   Probe probe{"example.com"};
   std::string expected{"example.com"};
-  ASSERT_EQ(expected, probe.getDomainname());
+  ASSERT_EQ(expected, probe.getDomainName());
 }
 
 TEST(Probe, testGetIp) {
@@ -30,7 +30,7 @@ TEST(Probe, testIsValid) {
 
 TEST(Probe, testSetValid) {
   Probe probe{"example.com"};
-  probe.setIsValidDomainname(true);
+  probe.setIsValidDomainName(true);
   bool expected{true};
   ASSERT_EQ(expected, probe.isValid());
 }

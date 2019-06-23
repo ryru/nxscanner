@@ -6,6 +6,7 @@
 #include "scanner/scanner.h"
 
 #include <chrono>
+#include <string>
 #include <vector>
 
 namespace nxscan {
@@ -13,16 +14,16 @@ namespace nxscan {
 class Nxscan {
 
  public:
-  explicit Nxscan(std::vector<std::string> &allDomain) : allDomain{allDomain} {}
+  explicit Nxscan(std::vector<std::string> const &allDomain) : allDomain{allDomain} {}
 
   void start();
   std::chrono::duration<double> getElapsedTime();
-  const std::vector<nxscan::scanner::Probes> getProbeResults();
+  std::vector<nxscan::scanner::Probes> getProbeResults();
 
  private:
   std::chrono::time_point<std::chrono::high_resolution_clock> timeStart;
   std::chrono::time_point<std::chrono::high_resolution_clock> timeEnd;
-  std::vector<std::string> allDomain;
+  std::vector<std::string> const allDomain;
   std::vector<nxscan::scanner::Probes> allProbes;
 
 

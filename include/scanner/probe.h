@@ -2,25 +2,26 @@
 #define NXSCANNER_INCLUDE_SCANNER_PROBE_H_
 
 #include <string>
+#include <utility>
 
 namespace nxscan::scanner {
 class Probe {
  public:
-  explicit Probe(std::string domainname) : domainname{std::move(domainname)} {}
+  explicit Probe(std::string domainName) : domainName{std::move(domainName)} {}
 
-  const std::string &getDomainname() const;
+  const std::string &getDomainName() const;
   const std::string &getIpAddress() const;
   void setIpAddress(const std::string &ip);
-  void setIsValidDomainname(bool isValid);
+  void setIsValidDomainName(bool isValid);
   bool isValid() const;
 
  private:
-  std::string domainname;
+  std::string const domainName;
   std::string ipAddress;
-  bool isValidDomainname{};
+  bool isValidDomainName{};
 };
 
-bool operator==(const Probe &lhs, const Probe &rhs);
+bool operator==(Probe const &lhs, Probe const &rhs);
 }
 
 #endif //NXSCANNER_INCLUDE_SCANNER_PROBE_H_

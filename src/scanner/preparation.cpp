@@ -20,7 +20,7 @@ static const std::string randomString(size_t length) {
   return str;
 }
 
-std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std::string> &allDomain) {
+std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std::string> const &allDomain) {
   std::vector<std::string> allHosts;
   std::vector<std::string> allRandomHosts;
   std::vector<nxscan::scanner::Probes> allProbes;

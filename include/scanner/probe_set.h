@@ -3,6 +3,8 @@
 
 #include "probe.h"
 
+#include <utility>
+
 namespace nxscan::scanner {
 class Probes {
  public:
@@ -12,9 +14,9 @@ class Probes {
   Probe &getDomain();
   Probe &getHost();
   Probe &getRandomHost();
-  const Probe &getDomain() const;
-  const Probe &getHost() const;
-  const Probe &getRandomHost() const;
+  Probe const &getDomain() const;
+  Probe const &getHost() const;
+  Probe const &getRandomHost() const;
 
  private:
   Probe domain;
