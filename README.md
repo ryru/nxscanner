@@ -3,105 +3,95 @@
 
 # NXScanner
 
-A DNS blocking detection application using DNS-only.
+The goal of this project is to find out if one or multiple domain names are blocked by DNS systems. No direct communication is established between the scanner client and one of the server of a checked domain.
 
-NXScanner helps detecting potential DNS blocking systems in your current network.
+NXScanner tries to achieve this by using clever DNS queries. This DNS-only approach is very fast and causes no noise on servers of the checked domains. However, the results are less accurate.
+
+This is a proof of concept project whose goal is to explore and further develop this lightweight scanning approach.
 
 
-## Overview
+## Download Executable
 
-DNS based blocking systems, as used in BYOD networks (such as public WiFi) or at ISP, do not resolve blacklisted domain names properly. Instead of resolving the correct IP address of a requested domain name, these systems either send nothing, an error or an IP address leading to a blocking web server.
+You find the latest Linux 64 bit build in the [Release](https://github.com/ryru/nxscanner/releases) section.
 
-While the first two reactions are relatively easy to detect, the third is a little harder.
-
-NXScanner helps with all three reactions and prints out which domains are potentially blocked in your current network.
-
-    
-     +----------+  example.com  +------------------+       +---------------------+
-     |  CLIENT  +--------------->   DNS RESOLVER   |       |   www.example.com   |
-     +----^-----+               +------------------+       |   IP: A             |
-          |                        |                       +---------------------+
-          +------------------------+
-                     IP: B                                 +---------------------+
-                                                           |   BLOCKING SERVER   |
-                                                           |   IP: B             |
-                                                           +---------------------+
+Instructions on how to build the software for Linux and Windows can be found below in the section _Compile it yourself_.
 
 
 ## Usage
 
-    $ ./nxscanner 
-    NXScanner version 1.0
+    $ ./nxs 
+    NXScanner version 1.1
     usage: nxscanner [-i FILE] [DOMAIN]...
       --domain DOMAIN	domain names to scan
       -i, --input FILE	read domain names from FILE
       -v, --version		print version
       -h, --help		print help
-    
-
-## Example
-
-Pass one or multiple domains to scan to nxscanner:
-
-    $ ./nxscanner example.com github.com
-    Starting NXScanner
-     example.com is okay
-     github.com is okay
-    
-    NXScanner done: 2 domain scanned with 0 potential DNS blocks in 0.07 seconds
 
 
-Pass one or multiple lists with domains plus additional domains to scan:
-
-    $ ./nxscanner -i list.txt example.com example.org
-    Starting NXScanner
-     addere.ch is okay
-     hsr.ch is okay
-     switch.ch is okay
-     example.com is okay
-     example.org is okay
-    
-    NXScanner done: 5 domain scanned with 0 potential DNS block in 0.16 seconds
+Also check out the [examples](https://github.com/ryru/nxscanner/blob/master/EXAMPLES.md).
 
 
-If _example.com_ is blocked:
+## Scan Method
 
-    $ ./nxscanner -i list.txt example.com example.org
-    Starting NXScanner
-     addere.ch is okay
-     hsr.ch is okay
-     switch.ch is okay
-    !example.com is potentially DNS blocked
-     example.org is okay
-    
-    NXScanner done: 5 domain scanned with 1 potential DNS block in 0.16 seconds
+If a DNS resolver does not block domains, it resolves the IP address properly. If, on the other hand, domains are blocked, it must perform one of the following reactions:
 
-## Scan Details
+1. DNS resolver does not return a response and does nothing
+2. DNS resolver returns an error message
+3. DNS Resolver sends back a wrong IP address.
 
-For each domain three DNS requests are sent to the DNS resolver. For example to test whether _example.com_ is blocked or not, the following requests are sent:
-
-1. `example.com`
-2. `www.example.com`
-3. `<random>.example.com`
-
-`<random>` stands for a random string.
-
-If _example.com_  is not blocked by a DNS resolver, the first two will resolve into an IP address whereas the third will result in an NXDOMAIN error.
-
-Otherwise the blocking system sends either nothing, three NXDOMAIN or three IP addresses to its blocking web server.
+Reactions 1 and 2 are easy to detect in which DNS resolver does not respond a IP address for a valid domain. The 3 reaction is harder to detect and will be described here.
 
 
-## False Positives
+### Scope
+
+The following assumptions are made:
+
+1. The domain exists
+2. In the zone file of the domain there is an entry for the host `www`
+3. The name server responds with NXDOMAIN error messages for hosts and subdomains that do not exist.
+
+
+### Scan
+
+The method is basically based on the evaluation of DNS responses.
+
+The _example.com_ domain is scanned.
+
+    +------------+                                        +----------------+
+    | NXS Client |                    example.com         |  DNS Resolver  |
+    |            +---------------------------------------->                |
+    |            |                www.example.com         |                |
+    |            +---------------------------------------->                |
+    |            |         random.www.example.com         |                |
+    |            +---------------------------------------->                |
+    +------------+                                        +----------------+
+
+
+If the DNS resolver blocks the domain _example.com_ by returning a wrong IP address e.g. to a blocking page, it must reply to all three requests with the same IP address. The DNS resolver does not check if the hosts and sobdomains of the blocked domain actually exist.
+
+In case _example.com_ is not blocked, the DNS resolver tries to find the IP addresses and asks the authoritative name server. For non-existent hosts or subdomains, it will respond with an NXDOMAIN error message.
+
+
+### Limitations
+
+This method is useful for finding out whether entire domains or subdomains are blocked. Individual hosts cannot be scanned.
+
+
+### False Positives
 
 Be aware, false-positives do exist. If a configuration of an authoritative name server sends back an IP address for every valid and invalid domain name, the scan method detects a potential block. For this reason every DNS block detection in the scan output is tagged _potentially DNS block_ detected.
 
-However, the false positive rate is relatively low:
-
-- Currently 4.6% false-positives in .CH Top 1000 domains
-- Currently 3% false-positives in Alexa Top 100 domains
+Only few name servers do not answer with NXDOMAIN errors on invalid host or subdomains. Also some ISPs intercept DNS requests and answers IP addresses to non-existing DNS resources.
 
 
-## Compile DIY
+### Conclusion
+
+This approach has little complexity and makes little demands on the client: being able to make DNS requests and evaluate their responses is enough to detect possible DNS blockages. No baseline information or third party systems are required.
+
+Speed and simplicity are at the expense of accuracy. The false positive rate can certainly be further reduced by additional scanning methods.
+
+
+## Compile it yourself
 
 The source code is OS independent.
 
@@ -146,3 +136,4 @@ Requirements:
 6. `cmake --build .`
 
 That's it: `bin\nxscanner --version`
+
