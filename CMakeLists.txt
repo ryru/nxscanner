@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5.1)
 
-set(this nxscanner)
+set(this nxs)
 
 project(${this} LANGUAGES CXX)
 
