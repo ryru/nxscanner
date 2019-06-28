@@ -6,6 +6,18 @@
 #include <iomanip>
 #include <iostream>
 
+void printStart(std::ostream &out) {
+  out << "Starting NXScanner " + std::to_string(versionMajor) + '.' + std::to_string(versionMajor) + '\n';
+}
+
+void printSummary(std::ostream &out,
+                  uint32_t const totalDomains,
+                  uint32_t const totalBlockedDomains,
+                  double const timeElapsed) {
+  out << "\nNXScanner done: " << totalDomains << " domain scanned with " << totalBlockedDomains
+      << " potential DNS block in " << std::fixed << std::setprecision(2) << timeElapsed << " seconds\n";
+}
+
 int main(int argc, char **argv) {
   std::variant<std::vector<std::string>, std::string> returnVariants = nxscan::validator::parse(argc, argv);
   try {
@@ -15,7 +27,7 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
 
-  std::cout << "Starting NXScanner " + std::to_string(versionMajor) + '.' + std::to_string(versionMajor) + '\n';
+  printStart(std::cout);
   nxscan::Nxscan scanner{std::get<std::vector<std::string>>(returnVariants)};
   scanner.start();
   auto elapsed = scanner.getElapsedTime();
@@ -23,9 +35,5 @@ int main(int argc, char **argv) {
 
   nxscan::validator::Display display{std::cout, allProbes};
   display.print();
-
-  std::cout << "\nNXScanner done: " << display.getDomainTotal() << " domain scanned with "
-            << display.getBlockedDomainTotal()
-            << " potential DNS block in " << std::fixed << std::setprecision(2) << elapsed.count() << " seconds\n";
-
+  printSummary(std::cout, display.getDomainTotal(), display.getBlockedDomainTotal(), elapsed.count());
 }
