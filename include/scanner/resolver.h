@@ -13,6 +13,7 @@ class Resolver {
  public:
 
   Resolver(boost::asio::io_service &ioService, Probe &probe) : resolver{ioService}, probe{probe} {}
+  Resolver(nxscan::scanner::Resolver &&) = default;
 
   void resolve();
 
