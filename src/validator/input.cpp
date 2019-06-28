@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <boost/program_options.hpp>
 #include <fstream>
-
-#include <iostream>
+#include <set>
 
 using namespace boost::program_options;
 
@@ -23,10 +22,13 @@ static const std::string getHelp() {
   return help;
 }
 
-void addAllElements(std::vector<std::string> &domainsToScan, std::vector<std::string> &inputData) {
-  std::copy_if(std::begin(inputData), std::end(inputData), std::back_inserter(domainsToScan), [](std::string &domain) {
-    return !(domain.size() < 4 || (domain.find('.') == std::string::npos));
-  });
+void addAllElements(std::vector<std::string> &domainsToScan, std::set<std::string> const &inputData) {
+  std::copy_if(std::begin(inputData),
+               std::end(inputData),
+               std::back_inserter(domainsToScan),
+               [](std::string const &domain) {
+                 return !(domain.size() < 4 || (domain.find('.') == std::string::npos));
+               });
 }
 
 std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int argc, char **argv) {
@@ -59,9 +61,9 @@ std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int
     std::for_each(listOfFiles.begin(), listOfFiles.end(), [&](std::string &filePath) {
       std::ifstream infile{filePath};
       std::string line;
-      std::vector<std::string> listOfDomains{};
+      std::set<std::string> listOfDomains{};
       while (std::getline(infile, line)) {
-        listOfDomains.push_back(line);
+        listOfDomains.insert(line);
       }
       addAllElements(allDomains, listOfDomains);
     });
@@ -70,7 +72,9 @@ std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int
 
   if (vm.count("domain")) {
     auto listOfDomains = vm["domain"].as<std::vector<std::string>>();
-    addAllElements(allDomains, listOfDomains);
+    std::set<std::string> s{};
+    std::copy(std::begin(listOfDomains), std::end(listOfDomains), std::inserter(s, std::begin(s)));
+    addAllElements(allDomains, s);
   }
 
   return allDomains;
