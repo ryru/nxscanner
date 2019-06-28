@@ -5,6 +5,8 @@
 #include <boost/program_options.hpp>
 #include <fstream>
 
+#include <iostream>
+
 using namespace boost::program_options;
 
 static const std::string getVersion() {
@@ -19,6 +21,12 @@ static const std::string getHelp() {
   help.append("  -v, --version\t\tprint version\n");
   help.append("  -h, --help\t\tprint help\n");
   return help;
+}
+
+void addAllElements(std::vector<std::string> &domainsToScan, std::vector<std::string> &inputData) {
+  std::copy_if(std::begin(inputData), std::end(inputData), std::back_inserter(domainsToScan), [](std::string &domain) {
+    return !(domain.size() < 4 || (domain.find('.') == std::string::npos));
+  });
 }
 
 std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int argc, char **argv) {
@@ -51,19 +59,18 @@ std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int
     std::for_each(listOfFiles.begin(), listOfFiles.end(), [&](std::string &filePath) {
       std::ifstream infile{filePath};
       std::string line;
+      std::vector<std::string> listOfDomains{};
       while (std::getline(infile, line)) {
-        allDomains.push_back(line);
+        listOfDomains.push_back(line);
       }
+      addAllElements(allDomains, listOfDomains);
     });
 
   }
 
   if (vm.count("domain")) {
     auto listOfDomains = vm["domain"].as<std::vector<std::string>>();
-    std::for_each(listOfDomains.begin(), listOfDomains.end(), [&](std::string &domain) {
-      allDomains.push_back(domain);
-    });
-
+    addAllElements(allDomains, listOfDomains);
   }
 
   return allDomains;
