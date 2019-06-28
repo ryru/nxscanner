@@ -116,7 +116,7 @@ Requirements:
 5. `cmake ..`
 6. `cmake --build .`
 
-That's it: `./bin/nxscanner --version`
+That's it: `./bin/nxs --version`
 
 
 ### Windows
@@ -135,5 +135,5 @@ Requirements:
 5. `cmake .. -G "MinGW Makefiles"`
 6. `cmake --build .`
 
-That's it: `bin\nxscanner --version`
+That's it: `bin\nxs --version`
 
