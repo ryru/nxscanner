@@ -8,9 +8,9 @@ std::vector<nxscan::scanner::Resolver> prepareScan(std::vector<nxscan::scanner::
                                                    boost::asio::io_service &io_service3) {
   std::vector<nxscan::scanner::Resolver> allResolvers{};
   std::for_each(allProbes.begin(), allProbes.end(), [&](nxscan::scanner::Probes &p) {
-    allResolvers.push_back(nxscan::scanner::Resolver{io_service1, p.getDomain()});
-    allResolvers.push_back(nxscan::scanner::Resolver{io_service2, p.getHost()});
-    allResolvers.push_back(nxscan::scanner::Resolver{io_service3, p.getRandomHost()});
+    allResolvers.emplace_back(io_service1, p.getRandomHost());
+    allResolvers.emplace_back(io_service2, p.getHost());
+    allResolvers.emplace_back(io_service3, p.getRandomHost());
   });
   return allResolvers;
 }
