@@ -7,7 +7,9 @@
 #include <iostream>
 
 void printStart(std::ostream &out) {
-  out << "Starting NXScanner " + std::to_string(versionMajor) + '.' + std::to_string(versionMajor) + '\n';
+  std::time_t localtime = std::time(nullptr);
+  out << "Starting NXScanner " + std::to_string(versionMajor) + '.' + std::to_string(versionMajor) + " at "
+      << std::put_time(std::localtime(&localtime), "%Y-%m-%d %H:%M %Z") << '\n';
 }
 
 void printSummary(std::ostream &out,
