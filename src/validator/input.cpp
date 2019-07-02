@@ -63,7 +63,9 @@ std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int
       std::string line;
       std::set<std::string> listOfDomains{};
       while (std::getline(infile, line)) {
-        listOfDomains.insert(line);
+        if (line.at(0) != '#') {
+          listOfDomains.insert(line);
+        }
       }
       addAllElements(allDomains, listOfDomains);
     });

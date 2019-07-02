@@ -9,3 +9,4 @@ Release date:
 - Print version and local time on every program execution
 - Use same random string for each test probe
 - Scan duplicate domains only once
+- Ignore lines starting with '#' on input files
