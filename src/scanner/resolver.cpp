@@ -2,13 +2,13 @@
 
 void nxscan::scanner::Resolver::resolve() {
   boost::asio::ip::tcp::resolver::query query(probe.getDomainName(), "http");
-
   resolver.async_resolve(query,
                          boost::bind(&Resolver::handle_resolve, this,
                                      boost::asio::placeholders::error,
                                      boost::asio::placeholders::iterator));
 
 }
+
 void nxscan::scanner::Resolver::handle_resolve(const boost::system::error_code &err,
                                                const boost::asio::ip::tcp::resolver::iterator &endpointIterator) {
   if (!err) {

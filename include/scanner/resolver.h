@@ -12,7 +12,7 @@ class Resolver {
 
  public:
 
-  Resolver(boost::asio::io_service &ioService, Probe &probe) : resolver{ioService}, probe{probe} {}
+  explicit Resolver(boost::asio::io_service &ioService, Probe &probe) : resolver{ioService}, probe{probe} {}
 
   void resolve();
 
