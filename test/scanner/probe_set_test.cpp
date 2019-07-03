@@ -1,6 +1,6 @@
 
-#include "../include/scanner/probe.h"
-#include "../include/scanner/probe_set.h"
+#include "scanner/probe.h"
+#include "scanner/probe_set.h"
 #include <gtest/gtest.h>
 
 using nxscan::scanner::Probe;

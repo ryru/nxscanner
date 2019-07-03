@@ -3,11 +3,11 @@ set(this UnitTests)
 set(
         sources
         ../src/scanner/probe.cpp
-        probe_test.cpp
+        scanner/probe_test.cpp
         ../src/scanner/probe_set.cpp
-        probe_set_test.cpp
+        scanner/probe_set_test.cpp
         ../src/scanner/preparation.cpp
-        preparation_test.cpp
+        scanner/preparation_test.cpp
 )
 
 add_executable(
