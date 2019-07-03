@@ -2,7 +2,6 @@
 #define NXSCANNER_INCLUDE_SCANNER_SCANNER_H_
 
 #include "probe_set.h"
-#include "resolver.h"
 
 #include <vector>
 

@@ -2,7 +2,7 @@ set(
         source
         main.cpp
         scanner/probe.cpp
-        scanner/probe_set.cpp scanner/preparation.cpp nxscan.cpp scanner/resolver.cpp scanner/scanner.cpp validator/display.cpp validator/input.cpp ../include/nxs.h)
+        scanner/probe_set.cpp scanner/preparation.cpp nxscan.cpp scanner/scanner.cpp validator/display.cpp validator/input.cpp ../include/nxs.h)
 
 add_executable(${this} ${source})
 target_include_directories(${this} PUBLIC include)
