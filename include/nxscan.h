@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace nxscan {
+namespace nxs {
 
 class Nxscan {
 
@@ -18,13 +18,13 @@ class Nxscan {
 
   void start();
   std::chrono::duration<double> getElapsedTime();
-  std::vector<nxscan::scanner::Probes> getProbeResults();
+  std::vector<nxs::scanner::Probes> getProbeResults();
 
  private:
   std::chrono::time_point<std::chrono::high_resolution_clock> timeStart;
   std::chrono::time_point<std::chrono::high_resolution_clock> timeEnd;
-  std::vector<std::string> const allDomain;
-  std::vector<nxscan::scanner::Probes> allProbes;
+  std::vector<std::string> const &allDomain;
+  std::vector<nxs::scanner::Probes> allProbes;
 
 
 };

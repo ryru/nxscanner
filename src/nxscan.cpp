@@ -1,18 +1,18 @@
 #include "nxscan.h"
 
-void nxscan::Nxscan::start() {
+void nxs::Nxscan::start() {
   // generate data set
-  allProbes = nxscan::scanner::getProbes(allDomain);
+  allProbes = nxs::scanner::getProbes(allDomain);
 
   // scan
-  nxscan::scanner::Scanner scanner{allProbes};
+  nxs::scanner::Scanner scanner{allProbes};
   timeStart = std::chrono::high_resolution_clock::now();
   scanner.scan();
   timeEnd = std::chrono::high_resolution_clock::now();
 }
-std::chrono::duration<double> nxscan::Nxscan::getElapsedTime() {
+std::chrono::duration<double> nxs::Nxscan::getElapsedTime() {
   return timeEnd - timeStart;
 }
-std::vector<nxscan::scanner::Probes> nxscan::Nxscan::getProbeResults() {
+std::vector<nxs::scanner::Probes> nxs::Nxscan::getProbeResults() {
   return allProbes;
 }

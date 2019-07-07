@@ -5,7 +5,7 @@
 #include <variant>
 #include <vector>
 
-namespace nxscan::validator {
+namespace nxs::validator {
 
 std::variant<std::vector<std::string>, std::string> parse(int argc, char **argv);
 }

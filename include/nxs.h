@@ -2,7 +2,13 @@
 #define NXSCANNER_INCLUDE_NXS_H_
 
 #include <stdint-gcc.h>
-static const uint32_t versionMajor{1};
-static const uint32_t versionMinor{1};
+#include <ostream>
+
+namespace nxs {
+static const constexpr uint32_t versionMajor{1};
+static const constexpr uint32_t versionMinor{2};
+
+int scannerFoo(std::ostream &, int argc, char **argv);
+}
 
 #endif //NXSCANNER_INCLUDE_NXS_H_

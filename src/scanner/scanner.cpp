@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <vector>
 
-using nxscan::scanner::Probe;
-using nxscan::scanner::Probes;
+using nxs::scanner::Probe;
+using nxs::scanner::Probes;
 
 void resolveHandler(Probe *probe, const boost::system::error_code &err,
                     const boost::asio::ip::tcp::resolver::iterator &endpointIterator) {
@@ -31,7 +31,7 @@ void resolveHandler(Probe *probe, const boost::system::error_code &err,
 
 }
 
-void nxscan::scanner::Scanner::scan() {
+void nxs::scanner::Scanner::scan() {
   boost::asio::io_service ioService1;
   boost::asio::ip::tcp::resolver resolver1{ioService1};
 

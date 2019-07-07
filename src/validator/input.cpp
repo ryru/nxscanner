@@ -9,7 +9,8 @@
 using namespace boost::program_options;
 
 static const std::string getVersion() {
-  return std::string{"NXScanner version " + std::to_string(versionMajor) + '.' + std::to_string(versionMinor) + '\n'};
+  return std::string{
+      "NXScanner version " + std::to_string(nxs::versionMajor) + '.' + std::to_string(nxs::versionMinor) + '\n'};
 }
 
 static const std::string getHelp() {
@@ -31,7 +32,7 @@ void addAllElements(std::vector<std::string> &domainsToScan, std::set<std::strin
                });
 }
 
-std::variant<std::vector<std::string>, std::string> nxscan::validator::parse(int argc, char **argv) {
+std::variant<std::vector<std::string>, std::string> nxs::validator::parse(int argc, char **argv) {
   options_description desc{"NXScanner options"};
   desc.add_options()
       ("domain", value<std::vector<std::string>>()->multitoken()->zero_tokens()->composing(), "domain names to scan")

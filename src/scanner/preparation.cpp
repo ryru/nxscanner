@@ -20,10 +20,10 @@ static const std::string randomString(size_t length) {
   return str;
 }
 
-std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std::string> const &allDomain) {
+std::vector<nxs::scanner::Probes> nxs::scanner::getProbes(std::vector<std::string> const &allDomain) {
   std::vector<std::string> allHosts;
   std::vector<std::string> allRandomHosts;
-  std::vector<nxscan::scanner::Probes> allProbes;
+  std::vector<nxs::scanner::Probes> allProbes;
   std::string randomPart{randomString(5)};
 
   std::for_each(allDomain.begin(), allDomain.end(), [&](const std::string &domain) {
@@ -39,10 +39,10 @@ std::vector<nxscan::scanner::Probes> nxscan::scanner::getProbes(std::vector<std:
     std::string random{randomPart + '.' + host};
     allRandomHosts.push_back(random);
 
-    nxscan::scanner::Probe p1{domain};
-    nxscan::scanner::Probe p2{host};
-    nxscan::scanner::Probe p3{random};
-    nxscan::scanner::Probes probePair{p1, p2, p3};
+    nxs::scanner::Probe p1{domain};
+    nxs::scanner::Probe p2{host};
+    nxs::scanner::Probe p3{random};
+    nxs::scanner::Probes probePair{p1, p2, p3};
     allProbes.push_back(probePair);
   });
 

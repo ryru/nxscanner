@@ -4,7 +4,7 @@
 #include <string>
 #include <utility>
 
-namespace nxscan::scanner {
+namespace nxs::scanner {
 class Probe {
  public:
   explicit Probe(std::string domainName) : domainName{std::move(domainName)} {}

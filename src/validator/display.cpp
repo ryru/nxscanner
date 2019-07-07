@@ -2,8 +2,8 @@
 
 #include <algorithm>
 
-void nxscan::validator::Display::print() {
-  std::for_each(allProbes.begin(), allProbes.end(), [&](nxscan::scanner::Probes const &p) {
+void nxs::validator::Display::print() {
+  std::for_each(allProbes.begin(), allProbes.end(), [&](nxs::scanner::Probes const &p) {
     domainTotal++;
 
     if (!p.getDomain().isValid()) {
@@ -25,26 +25,26 @@ void nxscan::validator::Display::print() {
   });
 
 }
-uint32_t nxscan::validator::Display::getDomainTotal() const {
+uint32_t nxs::validator::Display::getDomainTotal() const {
   return domainTotal;
 }
-uint32_t nxscan::validator::Display::getBlockedDomainTotal() const {
+uint32_t nxs::validator::Display::getBlockedDomainTotal() const {
   return blockedDomainTotal;
 }
-void nxscan::validator::Display::printBlockedDomain(nxscan::scanner::Probes const &p) const {
+void nxs::validator::Display::printBlockedDomain(nxs::scanner::Probes const &p) const {
   printAllResult(p.getDomain().getDomainName(), "!", "is potentially DNS blocked");
 
 }
-void nxscan::validator::Display::printNonBlockedDomain(nxscan::scanner::Probes const &p) const {
+void nxs::validator::Display::printNonBlockedDomain(nxs::scanner::Probes const &p) const {
   printAllResult(p.getDomain().getDomainName(), " ", "is okay");
 
 }
-void nxscan::validator::Display::printNonResolvableDomain(nxscan::scanner::Probes const &p) const {
+void nxs::validator::Display::printNonResolvableDomain(nxs::scanner::Probes const &p) const {
   printAllResult(p.getDomain().getDomainName(), " ", "is not resolvable");
 }
-void nxscan::validator::Display::printAllResult(std::string const &hostname,
-                                                std::string &&prefix,
-                                                std::string &&postfix) const {
+void nxs::validator::Display::printAllResult(std::string const &hostname,
+                                             std::string &&prefix,
+                                             std::string &&postfix) const {
   out << prefix;
   out << hostname;
   out << " ";

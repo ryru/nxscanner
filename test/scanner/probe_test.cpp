@@ -1,7 +1,7 @@
 #include "scanner/probe.h"
 #include <gtest/gtest.h>
 
-using nxscan::scanner::Probe;
+using nxs::scanner::Probe;
 
 TEST(Probe, testGetDomainname) {
   Probe probe{"example.com"};

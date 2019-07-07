@@ -3,8 +3,8 @@
 #include "scanner/probe_set.h"
 #include <gtest/gtest.h>
 
-using nxscan::scanner::Probe;
-using nxscan::scanner::Probes;
+using nxs::scanner::Probe;
+using nxs::scanner::Probes;
 
 Probe domain{"example.com"};
 Probe host{"www.example.com"};

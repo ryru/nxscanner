@@ -5,7 +5,7 @@
 
 #include <utility>
 
-namespace nxscan::scanner {
+namespace nxs::scanner {
 class Probes {
  public:
   Probes(Probe domain, Probe host, Probe randomHost)

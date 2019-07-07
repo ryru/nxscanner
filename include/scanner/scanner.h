@@ -5,15 +5,15 @@
 
 #include <vector>
 
-namespace nxscan::scanner {
+namespace nxs::scanner {
 
 class Scanner {
  public:
-  explicit Scanner(std::vector<nxscan::scanner::Probes> &allProbes) : allProbes{allProbes} {}
+  explicit Scanner(std::vector<nxs::scanner::Probes> &allProbes) : allProbes{allProbes} {}
   void scan();
 
  private:
-  std::vector<nxscan::scanner::Probes> &allProbes;
+  std::vector<nxs::scanner::Probes> &allProbes;
 };
 }
 

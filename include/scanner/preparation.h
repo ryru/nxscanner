@@ -6,10 +6,9 @@
 #include <string>
 #include <vector>
 
+namespace nxs::scanner {
 
-namespace nxscan::scanner {
-
-std::vector<nxscan::scanner::Probes> getProbes(std::vector<std::string> const &allDomain);
+std::vector<nxs::scanner::Probes> getProbes(std::vector<std::string> const &allDomain);
 
 }
 #endif //NXSCANNER_INCLUDE_SCANNER_PREPARATION_H_
