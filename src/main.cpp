@@ -2,5 +2,5 @@
 #include <iostream>
 
 int main(int argc, char **argv) {
-  nxs::scannerFoo(std::cout, argc, argv);
+  nxs::nxsScanner(std::cout, argc, argv);
 }

@@ -7,9 +7,9 @@
 
 namespace nxs::scanner {
 
-class Scanner {
+class DNSScanner {
  public:
-  explicit Scanner(std::vector<nxs::scanner::Probes> &allProbes) : allProbes{allProbes} {}
+  explicit DNSScanner(std::vector<nxs::scanner::Probes> &allProbes) : allProbes{allProbes} {}
   void scan();
 
  private:

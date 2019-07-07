@@ -5,7 +5,7 @@ void nxs::Nxscan::start() {
   allProbes = nxs::scanner::getProbes(allDomain);
 
   // scan
-  nxs::scanner::Scanner scanner{allProbes};
+  nxs::scanner::DNSScanner scanner{allProbes};
   timeStart = std::chrono::high_resolution_clock::now();
   scanner.scan();
   timeEnd = std::chrono::high_resolution_clock::now();

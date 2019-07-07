@@ -21,7 +21,7 @@ static void printSummary(std::ostream &out,
 }
 
 namespace nxs {
-int scannerFoo(std::ostream &out, int argc, char **argv) {
+int nxsScanner(std::ostream &out, int argc, char **argv) {
   std::variant<std::vector<std::string>, std::string> returnVariants = nxs::validator::parse(argc, argv);
   try {
     std::get<std::vector<std::string>>(returnVariants);

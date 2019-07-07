@@ -31,7 +31,7 @@ void resolveHandler(Probe *probe, const boost::system::error_code &err,
 
 }
 
-void nxs::scanner::Scanner::scan() {
+void nxs::scanner::DNSScanner::scan() {
   boost::asio::io_service ioService1;
   boost::asio::ip::tcp::resolver resolver1{ioService1};
 
